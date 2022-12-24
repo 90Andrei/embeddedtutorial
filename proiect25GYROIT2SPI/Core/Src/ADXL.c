@@ -88,6 +88,9 @@ bool ADXL_ReadMultipleBytes(uint8_t firstRegAddress, uint8_t *regValues,
 
 	return true;
 
+	//commit
+	//ssss
+
 }
 
 void ADXL_ReadValuesXYZ(int16_t *x, int16_t *y, int16_t *z) {
@@ -103,6 +106,8 @@ void ADXL_ReadValuesXYZ(int16_t *x, int16_t *y, int16_t *z) {
 	*y = ((int16_t) RxBuffer[4] << 8) + RxBuffer[3];
 	*z = ((int16_t) RxBuffer[6] << 8) + RxBuffer[5];
 	HAL_GPIO_WritePin(SPI_CS_ACC_GPIO_Port, SPI_CS_ACC_Pin, GPIO_PIN_SET);
+
+
 }
 
 
