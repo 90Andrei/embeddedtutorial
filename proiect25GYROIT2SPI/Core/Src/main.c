@@ -105,13 +105,13 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-  //  ADXL_Init();
+  //ADXL_Init();
   GYRO_PowerMode();
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-    int16_t x,y,z;
-  //  ADXL_ReadValuesXYZ(&x, &y, &z);
+  int16_t x,y,z;
+ // ADXL_ReadValuesXYZ(&x, &y, &z);
 
-  	GYRO_ReadValuesXYZ(&x, &y, &z);
+  GYRO_ReadValuesXYZ(&x, &y, &z);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,20 +119,20 @@ int main(void)
 
   while (1)
   {
-//	  if(is_new_ACC_datacomplete)
+	// if(is_new_ACC_datacomplete)
 //	  {
 //		  is_new_ACC_datacomplete = false;
 //		  ADXL_IT_GetValuesXYZ(&x, &y, &z);
 //		  ADXL_ConvertXYZValuesG(&x, &y, &z);
 //		  USART_TransmitACCValues(&x, &y, &z);
-//	  }
+ // 	  }
 
    if(is_new_GYRO_datacomplete)
    {
 	    is_new_GYRO_datacomplete =false;
 	    GYRO_IT_GetValuesXYZ(&x, &y, &z);
    	    GYRO_XYZConv(&x, &y, &z);
-   	 //   USART_TransmitGYROValues(&x, &y, &z);
+   	    USART_TransmitGYROValues(&x, &y, &z);
    }
     /* USER CODE END WHILE */
 
