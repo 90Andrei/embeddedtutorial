@@ -58,6 +58,8 @@ bool is_new_processing_ready = true;
 bool is_new_GYRO_datacomplete = false;
 bool HMC_EXTI_Ready = false;
 bool HMC_IT_Ready = false;
+uint8_t BMP_IT_Status = 0;
+uint32_t presmain;
 
 extern DMA_HandleTypeDef hdma_spi1_rx;
 /* USER CODE END PV */
@@ -109,7 +111,7 @@ int main(void)
   MX_SPI1_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  BMP_Init();
  // HMC_DEVIDv2();
 //  Set_SingleMeasureMode();
  // ADXL_Init();
@@ -153,6 +155,21 @@ int main(void)
   	 //   USART_TransmitGYROValues(&x, &y, &z);
     }
 */
+     if(BMP_IT_Status == 0)
+     {
+    	 BMP_IT_Status++;
+    	 BMP_Start_IT_Temp();
+     }
+     if(BMP_IT_Status == 2)
+     {
+    	BMP_GetTemp();
+    	BMP_Start_IT_Pres();
+     }
+     if(BMP_IT_Status > 2)
+     {
+    	BMP_GetPres();
+    	BMP_IT_Status = 0;
+     }
 
 //	 if(HMC_IT_Ready)
 //	 {
@@ -160,7 +177,7 @@ int main(void)
 //		 USART_TransmitHMCValues(&x, &y, &z);
 //		 HMC_IT_Ready = false;
 	  //}
-	    BMP_DevId();
+
 	 // HMC_readtest();
     /* USER CODE END WHILE */
 

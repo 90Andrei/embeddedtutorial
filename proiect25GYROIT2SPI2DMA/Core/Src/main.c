@@ -133,7 +133,7 @@ int main(void)
 		is_new_ACC_datacomplete = false;
 		ADXL_IT_GetValuesXYZ(&x, &y, &z);
 		ADXL_ConvertXYZValuesG(&x, &y, &z);
-	//	USART_TransmitACCValues(&x, &y, &z);
+		USART_TransmitACCValues(&x, &y, &z);
  	}
 
     if(is_new_GYRO_datacomplete)
@@ -142,7 +142,7 @@ int main(void)
 	    GYRO_IT_GetValuesXYZ(&x, &y, &z);
   	    GYRO_XYZConv(&x, &y, &z);
 
-  	 //   USART_TransmitGYROValues(&x, &y, &z);
+  	    USART_TransmitGYROValues(&x, &y, &z);
     }
     /* USER CODE END WHILE */
 
